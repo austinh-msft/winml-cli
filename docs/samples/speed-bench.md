@@ -140,8 +140,27 @@ For stable results:
 - With greedy decoding, `response_sha256` per prompt should match between runs
   of the same model and settings.
 
+## Build a report
+
+The [`llm-perf-report`](https://github.com/microsoft/winml-cli/blob/main/skills/llm-perf-report/SKILL.md)
+agent skill combines the reports into one comparison and renders a PowerPoint
+deck with native charts: decode throughput and speedup against a baseline per
+bucket and category, draft acceptance, time to first token, identical outputs,
+and provenance. From a winml-cli checkout:
+
+```powershell
+uv run skills\llm-perf-report\scripts\combine.py D:\bench\results -o D:\bench\report\combined.json --baseline config=plain
+uv run skills\llm-perf-report\scripts\render_slides.py D:\bench\report\combined.json -o D:\bench\report\deck.pptx
+```
+
+The combined report also measures how often outputs match between runs of the
+same configuration. Greedy decoding on a server is not always reproducible, so
+read the match rate against the baseline as a difference from that rate. Keep
+the reports and decks out of source control.
+
 ## See also
 
 - [OpenAI-compatible server — text generation speed](openai-endpoint-perf.md)
 - [`winml perf`](../commands/perf.md)
 - The [`llm-speed-bench` agent skill](https://github.com/microsoft/winml-cli/blob/main/skills/llm-speed-bench/SKILL.md)
+- The [`llm-perf-report` agent skill](https://github.com/microsoft/winml-cli/blob/main/skills/llm-perf-report/SKILL.md)

@@ -1,0 +1,20 @@
+{
+  "skill_name": "llm-perf-report",
+  "description": "Activation cases: 7 should trigger and 7 should not. Keep labels and rationales evaluator-only; grade actual skill invocation from the host trace.",
+  "queries": [
+    { "query": "combine my winml perf --endpoint json reports from several runs into one comparison.", "should_trigger": true, "rationale": "Direct combine request." },
+    { "query": "make a powerpoint from my llama-server benchmark results comparing with and without a draft model.", "should_trigger": true, "rationale": "Deck from endpoint reports, speculative decoding comparison." },
+    { "query": "i ran SPEED-Bench with winml perf on two configs, how do i chart the speedup per category and per input length?", "should_trigger": true, "rationale": "Per-cohort speedup charts." },
+    { "query": "share decode tokens/sec and TTFT results from winml perf runs with my team as slides.", "should_trigger": true, "rationale": "Shareable report from endpoint runs." },
+    { "query": "my combined report shows only half the responses match between runs. how should i read the identical outputs slide?", "should_trigger": true, "rationale": "Reading the skill's identical-output comparison." },
+    { "query": "combine.py warned that my runs used different prompts_sha256. what does that mean?", "should_trigger": true, "rationale": "Warnings from the skill's script." },
+    { "query": "compare two llama.cpp server builds using the reports winml perf wrote and pick a baseline.", "should_trigger": true, "rationale": "Baseline comparison across labeled runs." },
+    { "query": "how do i download SPEED-Bench and run it against my llama-server?", "should_trigger": false, "rationale": "Acquiring and running the benchmark belongs to llm-speed-bench." },
+    { "query": "benchmark microsoft/resnet-50 latency on my snapdragon npu with winml.", "should_trigger": false, "rationale": "Classic ONNX benchmarking belongs to use-winml-cli." },
+    { "query": "evaluate the accuracy of my llm on mmlu-pro.", "should_trigger": false, "rationale": "Accuracy evaluation, not speed reporting." },
+    { "query": "make a slide deck about our quarterly roadmap.", "should_trigger": false, "rationale": "General slides with no benchmark reports." },
+    { "query": "optimize the QDQ placement of my ONNX model to reduce NPU latency.", "should_trigger": false, "rationale": "Graph optimization belongs to auto-optimize." },
+    { "query": "my llama-server crashes when loading a draft model. how do i fix it?", "should_trigger": false, "rationale": "Server troubleshooting." },
+    { "query": "what is speculative decoding?", "should_trigger": false, "rationale": "Conceptual question with no reports." }
+  ]
+}
