@@ -147,9 +147,11 @@ winml perf --endpoint http://127.0.0.1:8080/v1 --dataset D:\bench\speed-bench\mi
 
 ## Next step
 
-To compare runs, load the JSON reports that share `dataset.prompts_sha256`,
-group them by `provenance.run_labels`, and compare per-cohort medians across
-run indexes. A report-building workflow can consume these files directly.
+To compare runs, build a report with the
+[`llm-perf-report`](../llm-perf-report/SKILL.md) skill: it combines the reports
+that share `dataset.prompts_sha256`, groups them by `provenance.run_labels`,
+compares each configuration with a baseline per cohort, and renders a
+PowerPoint deck.
 
 See also the [SPEED-Bench sample](../../docs/samples/speed-bench.md) and the
 [OpenAI-compatible server sample](../../docs/samples/openai-endpoint-perf.md).

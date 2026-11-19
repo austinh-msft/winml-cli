@@ -1,8 +1,9 @@
 # Use WinML CLI with AI Agents
 
-This section documents four complementary agent workflows: using the CLI to
+This section documents five complementary agent workflows: using the CLI to
 build and run models, contributing missing model support, investigating
-ONNX inference latency, and measuring LLM text generation speed with SPEED-Bench.
+ONNX inference latency, measuring LLM text generation speed with SPEED-Bench,
+and building shareable reports from those measurements.
 
 ## Choose a skill
 
@@ -12,6 +13,7 @@ ONNX inference latency, and measuring LLM text generation speed with SPEED-Bench
 | Add or repair model support and prepare a validated contribution | `adding-model-support` | [Add model support with an AI agent](adding-model-support.md) |
 | Investigate latency or validate optimization candidates on an EP/device | `auto-optimize` | [Auto Optimize](auto-optimize.md) |
 | Prepare SPEED-Bench prompts and benchmark an OpenAI-compatible LLM server | `llm-speed-bench` | [SPEED-Bench sample](../../samples/speed-bench.md) |
+| Combine `winml perf --endpoint` reports and render a comparison deck | `llm-perf-report` | [Build a report](../../samples/speed-bench.md#build-a-report) |
 
 Use `use-winml-cli` for normal model workflows, including targeting available
 CPU, GPU, and NPU execution providers.

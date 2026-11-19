@@ -1,0 +1,53 @@
+{
+  "skill_name": "llm-perf-report",
+  "description": "Advice-only response cases for combining winml perf --endpoint reports and rendering a shareable deck. Assertions are ungraded placeholders: passed null and empty evidence. Validate every concrete command against the scripts' --help.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "combine-and-render",
+      "prompt": "I have plain-0.json, plain-1.json, draft-0.json and draft-1.json from winml perf --endpoint (labels config=plain and config=draft). How do I turn them into slides I can share with my team?",
+      "files": [],
+      "assertions": [
+        { "id": "combine-first", "text": "Runs combine.py over the reports with --baseline config=plain and -o pointing to a combined JSON file.", "passed": null, "evidence": "" },
+        { "id": "render-second", "text": "Runs render_slides.py on the combined JSON with -o pointing to a .pptx file.", "passed": null, "evidence": "" },
+        { "id": "uv-run", "text": "Uses uv run so python-pptx is installed in an isolated environment rather than added to winml-cli.", "passed": null, "evidence": "" },
+        { "id": "outside-git", "text": "Keeps reports, the combined JSON and the deck outside the repository.", "passed": null, "evidence": "" },
+        { "id": "check-provenance", "text": "Suggests reviewing the method and provenance slide before sharing.", "passed": null, "evidence": "" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "slower-config",
+      "prompt": "my combined report says the draft config is 0.8x of plain. that can't be right, speculative decoding is supposed to be faster. can you just leave that slide out?",
+      "files": [],
+      "assertions": [
+        { "id": "honest", "text": "Explains that a speedup below 1.00x is a valid measured result and does not hide or alter it.", "passed": null, "evidence": "" },
+        { "id": "run-range", "text": "Points to the run-range check and the per-run chart to judge whether the difference exceeds run-to-run noise.", "passed": null, "evidence": "" },
+        { "id": "causes", "text": "Suggests checking draft acceptance per cohort and the draft model's cost as possible causes.", "passed": null, "evidence": "" },
+        { "id": "no-invented-numbers", "text": "Does not state speedups or acceptance rates that were not produced in the session.", "passed": null, "evidence": "" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "nondeterministic-outputs",
+      "prompt": "the deck says only 60% of outputs match between my two plain runs and 45% between draft and plain. is speculative decoding changing the answers?",
+      "files": [],
+      "assertions": [
+        { "id": "within-baseline", "text": "Explains that the within-series rate of the baseline is the determinism of the setup.", "passed": null, "evidence": "" },
+        { "id": "compare-rates", "text": "Compares the vs-baseline rate with the baseline's within-series rate rather than with 100 percent.", "passed": null, "evidence": "" },
+        { "id": "no-single-claim", "text": "Does not conclude identical or changed outputs from a single comparison and suggests more runs.", "passed": null, "evidence": "" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "mismatch-warnings",
+      "prompt": "combine.py printed warnings about different prompts_sha256 and max_new_tokens. can I still use the deck?",
+      "files": [],
+      "assertions": [
+        { "id": "same-prompts", "text": "Explains that series are only comparable when they sent the same prompts with the same settings.", "passed": null, "evidence": "" },
+        { "id": "rerun-or-filter", "text": "Recommends rerunning with matching settings or combining only the matching reports.", "passed": null, "evidence": "" },
+        { "id": "caveats-slide", "text": "Notes that the warnings appear on the caveats slide if the deck is shared anyway.", "passed": null, "evidence": "" }
+      ]
+    }
+  ]
+}

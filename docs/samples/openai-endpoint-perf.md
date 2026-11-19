@@ -138,6 +138,18 @@ acceptance rate. Repeat each configuration with increasing `--run-index` values,
 and alternate the configurations, so that drift in clocks or temperature affects
 every configuration alike.
 
+## Build a report
+
+To compare the runs and share the result, use the
+[`llm-perf-report`](https://github.com/microsoft/winml-cli/blob/main/skills/llm-perf-report/SKILL.md)
+agent skill. It groups reports by their run labels, compares each configuration
+with a baseline, and renders a PowerPoint deck with native charts:
+
+```powershell
+uv run skills\llm-perf-report\scripts\combine.py results -o report\combined.json --baseline config=plain
+uv run skills\llm-perf-report\scripts\render_slides.py report\combined.json -o report\deck.pptx
+```
+
 ## Report fields
 
 Endpoint reports use `schema_version: 4`, with `benchmark_info.runtime:
